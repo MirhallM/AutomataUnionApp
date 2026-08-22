@@ -6,8 +6,7 @@ namespace AutomataUnionApp.Validacion
     // Valida que un Automata cumpla las propiedades de un DFA:
     // unicidad de nombres, símbolos permitidos, estado inicial y
     // finales válidos, y que delta sea total y determinista.
-    // Cada regla es su propio método para que sea fácil de leer,
-    // de probar y de defender en la sustentación.
+
     public class ValidadorDFA
     {
         public void Validar(Automata a)
