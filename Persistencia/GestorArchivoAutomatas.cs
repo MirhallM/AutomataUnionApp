@@ -1,13 +1,13 @@
 ﻿using System.IO;
 using AutomataUnionApp.Dominio;
 using AutomataUnionApp.Estructuras;
+using AutomataUnionApp.Utilidades;
 
 namespace AutomataUnionApp.Persistencia
 {
     // Guarda y carga la lista de autómatas en un archivo de texto con
     // un formato propio (ver ejemplo en el comentario de Guardar).
-    // El parseo es manual: sin Split(), sin IndexOf() y sin regex,
-    // para mantener la misma filosofía del resto del proyecto.
+    // El parseo usa TextoUtil, compartido con el resto del proyecto.
     public class GestorArchivoAutomatas
     {
         // AUTOMATA
@@ -72,10 +72,11 @@ namespace AutomataUnionApp.Persistencia
         {
             escritor.WriteLine("AUTOMATA");
             escritor.WriteLine("NOMBRE:" + a.Nombre);
-            escritor.WriteLine("ESTADOS:" + UnirConComas(a.Estados));
-            escritor.WriteLine("ALFABETO:" + UnirConComas(a.Alfabeto));
+            escritor.WriteLine("VALIDO:" + (a.EsValido ? "true" : "false"));
+            escritor.WriteLine("ESTADOS:" + TextoUtil.UnirConComas(a.Estados));
+            escritor.WriteLine("ALFABETO:" + TextoUtil.UnirConComas(a.Alfabeto));
             escritor.WriteLine("INICIAL:" + (a.EstadoInicial ?? ""));
-            escritor.WriteLine("FINALES:" + UnirConComas(a.EstadosFinales));
+            escritor.WriteLine("FINALES:" + TextoUtil.UnirConComas(a.EstadosFinales));
 
             NodoLista<Transicion>? t = a.Transiciones.Cabeza;
             while (t != null)
@@ -89,7 +90,7 @@ namespace AutomataUnionApp.Persistencia
 
         private void ProcesarLinea(Automata a, string linea)
         {
-            int posicion = BuscarPosicion(linea, ':');
+            int posicion = TextoUtil.BuscarPosicion(linea, ':');
             if (posicion < 0)
             {
                 return;
@@ -102,13 +103,17 @@ namespace AutomataUnionApp.Persistencia
             {
                 a.Nombre = valor;
             }
+            else if (clave == "VALIDO")
+            {
+                a.EsValido = (valor == "true");
+            }
             else if (clave == "ESTADOS")
             {
-                a.Estados = DividirPorComas(valor);
+                a.Estados = TextoUtil.DividirPorComas(valor);
             }
             else if (clave == "ALFABETO")
             {
-                a.Alfabeto = DividirPorComas(valor);
+                a.Alfabeto = TextoUtil.DividirPorComas(valor);
             }
             else if (clave == "INICIAL")
             {
@@ -116,78 +121,16 @@ namespace AutomataUnionApp.Persistencia
             }
             else if (clave == "FINALES")
             {
-                a.EstadosFinales = DividirPorComas(valor);
+                a.EstadosFinales = TextoUtil.DividirPorComas(valor);
             }
             else if (clave == "TRANSICION")
             {
-                Lista<string> partes = DividirPorComas(valor);
+                Lista<string> partes = TextoUtil.DividirPorComas(valor);
                 if (partes.Cantidad == 3)
                 {
                     a.Transiciones.Agregar(new Transicion(partes.ObtenerEn(0), partes.ObtenerEn(1), partes.ObtenerEn(2)));
                 }
             }
-        }
-
-        // Búsqueda manual de un carácter dentro de una cadena (reemplaza a IndexOf).
-        private int BuscarPosicion(string texto, char caracter)
-        {
-            for (int i = 0; i < texto.Length; i++)
-            {
-                if (texto[i] == caracter)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
-        // Separa una cadena por comas y devuelve una Lista propia (reemplaza a Split).
-        private Lista<string> DividirPorComas(string texto)
-        {
-            Lista<string> partes = new Lista<string>();
-            string actual = "";
-
-            for (int i = 0; i < texto.Length; i++)
-            {
-                char c = texto[i];
-                if (c == ',')
-                {
-                    partes.Agregar(actual.Trim());
-                    actual = "";
-                }
-                else
-                {
-                    actual += c;
-                }
-            }
-
-            if (actual.Trim().Length > 0 || partes.Cantidad > 0)
-            {
-                partes.Agregar(actual.Trim());
-            }
-
-            return partes;
-        }
-
-        // Une los valores de una Lista propia con comas (reemplaza a String.Join).
-        private string UnirConComas(Lista<string> lista)
-        {
-            string resultado = "";
-            NodoLista<string>? actual = lista.Cabeza;
-            bool primero = true;
-
-            while (actual != null)
-            {
-                if (!primero)
-                {
-                    resultado += ",";
-                }
-                resultado += actual.Valor;
-                primero = false;
-                actual = actual.Siguiente;
-            }
-
-            return resultado;
         }
     }
 }
