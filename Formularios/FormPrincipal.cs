@@ -1,18 +1,11 @@
 ﻿using System;
 using System.Windows.Forms;
-using AutomataUnionApp.Dominio;
-using AutomataUnionApp.Estructuras;
-using AutomataUnionApp.Persistencia;
 
 namespace AutomataUnionApp.Formularios
 {
-    // Menú de inicio: abre FormEditarAutomata, FormUnion, o muestra un
-    // resumen rápido de los autómatas guardados en el archivo.
+    // Menú de inicio: abre FormEditarAutomata, FormUnion, y FormVerGuardados.
     public partial class FormPrincipal : Form
     {
-        private const string RutaArchivo = "automatas.dat";
-        private readonly GestorArchivoAutomatas _gestorArchivos = new GestorArchivoAutomatas();
-
         public FormPrincipal()
         {
             InitializeComponent();
@@ -30,29 +23,12 @@ namespace AutomataUnionApp.Formularios
             form.ShowDialog();
         }
 
-        // Resumen rápido en un MessageBox: nombre + si es válido o no.
-        // No es una pantalla dedicada, pero cumple con "ver lo guardado"
-        // sin agregar un cuarto Form solo para esto.
+        // Abre la pantalla dedicada que lista los autómatas guardados
+        // y muestra el detalle del que se seleccione.
         private void BtnVerGuardados_Click(object? sender, EventArgs e)
         {
-            Lista<Automata> automatas = _gestorArchivos.Cargar(RutaArchivo);
-
-            if (automatas.Cantidad == 0)
-            {
-                MessageBox.Show("Todavía no hay autómatas guardados.", "Autómatas guardados");
-                return;
-            }
-
-            string resumen = "";
-            NodoLista<Automata>? actual = automatas.Cabeza;
-            while (actual != null)
-            {
-                string estado = actual.Valor.EsValido ? "válido" : "inválido";
-                resumen += "• " + actual.Valor.Nombre + " (" + estado + ")\n";
-                actual = actual.Siguiente;
-            }
-
-            MessageBox.Show(resumen, "Autómatas guardados (" + automatas.Cantidad + ")");
+            FormVerGuardados form = new FormVerGuardados();
+            form.ShowDialog();
         }
 
         private void BtnSalir_Click(object? sender, EventArgs e)

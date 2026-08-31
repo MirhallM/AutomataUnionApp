@@ -99,51 +99,7 @@ namespace AutomataUnionApp.Formularios
         // con → para el inicial y * para los finales en la primera columna.
         private void MostrarTablaResultado(Automata a)
         {
-            dgvResultado.Columns.Clear();
-            dgvResultado.Rows.Clear();
-
-            DataGridViewTextBoxColumn colEstado = new DataGridViewTextBoxColumn { Name = "Estado", HeaderText = "Estado", ReadOnly = true };
-            dgvResultado.Columns.Add(colEstado);
-
-            NodoLista<string>? nodoSimboloColumna = a.Alfabeto.Cabeza;
-            while (nodoSimboloColumna != null)
-            {
-                DataGridViewTextBoxColumn col = new DataGridViewTextBoxColumn
-                {
-                    Name = nodoSimboloColumna.Valor,
-                    HeaderText = nodoSimboloColumna.Valor,
-                    ReadOnly = true
-                };
-                dgvResultado.Columns.Add(col);
-                nodoSimboloColumna = nodoSimboloColumna.Siguiente;
-            }
-
-            NodoLista<string>? nodoEstado = a.Estados.Cabeza;
-            while (nodoEstado != null)
-            {
-                string etiqueta = nodoEstado.Valor;
-                if (etiqueta == a.EstadoInicial)
-                {
-                    etiqueta = "→" + etiqueta;
-                }
-                if (a.EstadosFinales.Existe(nodoEstado.Valor))
-                {
-                    etiqueta = "*" + etiqueta;
-                }
-
-                int indiceFila = dgvResultado.Rows.Add();
-                dgvResultado.Rows[indiceFila].Cells["Estado"].Value = etiqueta;
-
-                NodoLista<string>? nodoSimbolo = a.Alfabeto.Cabeza;
-                while (nodoSimbolo != null)
-                {
-                    Transicion? transicion = a.BuscarTransicion(nodoEstado.Valor, nodoSimbolo.Valor);
-                    dgvResultado.Rows[indiceFila].Cells[nodoSimbolo.Valor].Value = transicion != null ? transicion.Destino : "";
-                    nodoSimbolo = nodoSimbolo.Siguiente;
-                }
-
-                nodoEstado = nodoEstado.Siguiente;
-            }
+            TablaAutomataUtil.LlenarTabla(dgvResultado, a);
         }
 
         private void MostrarComponentes(Automata a)

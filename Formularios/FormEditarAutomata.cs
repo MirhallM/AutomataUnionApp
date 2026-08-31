@@ -53,6 +53,24 @@ namespace AutomataUnionApp.Formularios
             LlenarFilasTabla(estados, alfabeto);
 
             btnGuardar.Enabled = false;
+            btnAgregarFilaManual.Enabled = true;
+        }
+
+        // Agrega una fila extra con Origen y Símbolo editables (a diferencia
+        // de las filas generadas automáticamente, que son de solo lectura).
+        // Sirve para construir casos de prueba deliberados: por ejemplo,
+        // duplicar un par (estado, símbolo) ya existente para demostrar
+        // que el validador detecta el no determinismo.
+        private void BtnAgregarFilaManual_Click(object? sender, EventArgs e)
+        {
+            if (_automataEnEdicion == null)
+            {
+                return;
+            }
+
+            int indice = dgvTransiciones.Rows.Add("", "", null);
+            dgvTransiciones.Rows[indice].Cells["Origen"].ReadOnly = false;
+            dgvTransiciones.Rows[indice].Cells["Simbolo"].ReadOnly = false;
         }
 
         private void ConstruirColumnasTabla(Lista<string> estados)
@@ -179,6 +197,7 @@ namespace AutomataUnionApp.Formularios
             lblResultado.Text = "";
             lstErrores.Items.Clear();
             btnGuardar.Enabled = false;
+            btnAgregarFilaManual.Enabled = false;
             _automataEnEdicion = null;
         }
     }

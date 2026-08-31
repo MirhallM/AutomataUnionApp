@@ -61,24 +61,25 @@
             this.lblTrazaTitulo.AutoSize = true;
             this.lblTrazaTitulo.Location = new System.Drawing.Point(20, 60);
             this.lblTrazaTitulo.Name = "lblTrazaTitulo";
-            this.lblTrazaTitulo.Size = new System.Drawing.Size(190, 15);
+            this.lblTrazaTitulo.Size = new System.Drawing.Size(230, 15);
             this.lblTrazaTitulo.TabIndex = 3;
-            this.lblTrazaTitulo.Text = "Traza en el autómata unión:";
+            this.lblTrazaTitulo.Text = "Derivación δ̂ en el autómata unión:";
             //
             // txtTraza
             //
+            this.txtTraza.Font = new System.Drawing.Font("Consolas", 9F);
             this.txtTraza.Location = new System.Drawing.Point(20, 85);
             this.txtTraza.Multiline = true;
             this.txtTraza.Name = "txtTraza";
             this.txtTraza.ReadOnly = true;
             this.txtTraza.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtTraza.Size = new System.Drawing.Size(530, 60);
+            this.txtTraza.Size = new System.Drawing.Size(530, 220);
             this.txtTraza.TabIndex = 4;
             //
             // lblTitA1
             //
             this.lblTitA1.AutoSize = true;
-            this.lblTitA1.Location = new System.Drawing.Point(20, 160);
+            this.lblTitA1.Location = new System.Drawing.Point(20, 320);
             this.lblTitA1.Name = "lblTitA1";
             this.lblTitA1.Size = new System.Drawing.Size(72, 15);
             this.lblTitA1.TabIndex = 5;
@@ -87,7 +88,7 @@
             // lblVeredictoA1
             //
             this.lblVeredictoA1.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblVeredictoA1.Location = new System.Drawing.Point(20, 180);
+            this.lblVeredictoA1.Location = new System.Drawing.Point(20, 340);
             this.lblVeredictoA1.Name = "lblVeredictoA1";
             this.lblVeredictoA1.Size = new System.Drawing.Size(160, 25);
             this.lblVeredictoA1.TabIndex = 6;
@@ -95,7 +96,7 @@
             // lblTitA2
             //
             this.lblTitA2.AutoSize = true;
-            this.lblTitA2.Location = new System.Drawing.Point(210, 160);
+            this.lblTitA2.Location = new System.Drawing.Point(210, 320);
             this.lblTitA2.Name = "lblTitA2";
             this.lblTitA2.Size = new System.Drawing.Size(72, 15);
             this.lblTitA2.TabIndex = 7;
@@ -104,7 +105,7 @@
             // lblVeredictoA2
             //
             this.lblVeredictoA2.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblVeredictoA2.Location = new System.Drawing.Point(210, 180);
+            this.lblVeredictoA2.Location = new System.Drawing.Point(210, 340);
             this.lblVeredictoA2.Name = "lblVeredictoA2";
             this.lblVeredictoA2.Size = new System.Drawing.Size(160, 25);
             this.lblVeredictoA2.TabIndex = 8;
@@ -112,7 +113,7 @@
             // lblTitUnion
             //
             this.lblTitUnion.AutoSize = true;
-            this.lblTitUnion.Location = new System.Drawing.Point(400, 160);
+            this.lblTitUnion.Location = new System.Drawing.Point(400, 320);
             this.lblTitUnion.Name = "lblTitUnion";
             this.lblTitUnion.Size = new System.Drawing.Size(46, 15);
             this.lblTitUnion.TabIndex = 9;
@@ -121,7 +122,7 @@
             // lblVeredictoUnion
             //
             this.lblVeredictoUnion.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.lblVeredictoUnion.Location = new System.Drawing.Point(400, 180);
+            this.lblVeredictoUnion.Location = new System.Drawing.Point(400, 340);
             this.lblVeredictoUnion.Name = "lblVeredictoUnion";
             this.lblVeredictoUnion.Size = new System.Drawing.Size(160, 25);
             this.lblVeredictoUnion.TabIndex = 10;
@@ -130,7 +131,7 @@
             //
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(580, 240);
+            this.ClientSize = new System.Drawing.Size(580, 400);
             this.Controls.Add(this.lblVeredictoUnion);
             this.Controls.Add(this.lblTitUnion);
             this.Controls.Add(this.lblVeredictoA2);

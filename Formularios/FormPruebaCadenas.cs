@@ -3,7 +3,6 @@ using System.Drawing;
 using System.Windows.Forms;
 using AutomataUnionApp.Dominio;
 using AutomataUnionApp.Simulacion;
-using AutomataUnionApp.Utilidades;
 
 namespace AutomataUnionApp.Formularios
 {
@@ -47,23 +46,18 @@ namespace AutomataUnionApp.Formularios
             ResultadoSimulacion resultadoA2 = _simulador.Simular(_a2, cadena);
             ResultadoSimulacion resultadoUnion = _simulador.Simular(_union, cadena);
 
-            MostrarTraza(resultadoUnion);
+            MostrarTraza(cadena, resultadoUnion);
             MostrarVeredicto(lblVeredictoA1, resultadoA1);
             MostrarVeredicto(lblVeredictoA2, resultadoA2);
             MostrarVeredicto(lblVeredictoUnion, resultadoUnion);
         }
 
-        // La traza (secuencia de estados compuestos) solo tiene sentido
-        // mostrarla para el autómata unión, tal como pide el enunciado.
-        private void MostrarTraza(ResultadoSimulacion resultado)
+        // Construye la derivación formal de δ̂ paso a paso, con el mismo
+        // formato usado en clase. Solo tiene sentido mostrarla para el
+        // autómata unión, tal como pide el enunciado.
+        private void MostrarTraza(string cadena, ResultadoSimulacion resultado)
         {
-            if (resultado.Error != null)
-            {
-                txtTraza.Text = "Error: " + resultado.Error;
-                return;
-            }
-
-            txtTraza.Text = TextoUtil.Unir(resultado.Traza, " → ");
+            txtTraza.Text = DeltaGorritoUtil.Generar(cadena, resultado);
         }
 
         private void MostrarVeredicto(Label etiqueta, ResultadoSimulacion resultado)

@@ -28,6 +28,7 @@
             this.lblFinales = new System.Windows.Forms.Label();
             this.txtFinales = new System.Windows.Forms.TextBox();
             this.btnGenerarTabla = new System.Windows.Forms.Button();
+            this.btnAgregarFilaManual = new System.Windows.Forms.Button();
             this.dgvTransiciones = new System.Windows.Forms.DataGridView();
             this.btnValidar = new System.Windows.Forms.Button();
             this.btnGuardar = new System.Windows.Forms.Button();
@@ -126,6 +127,17 @@
             this.btnGenerarTabla.UseVisualStyleBackColor = true;
             this.btnGenerarTabla.Click += new System.EventHandler(this.BtnGenerarTabla_Click);
             //
+            // btnAgregarFilaManual
+            //
+            this.btnAgregarFilaManual.Enabled = false;
+            this.btnAgregarFilaManual.Location = new System.Drawing.Point(280, 200);
+            this.btnAgregarFilaManual.Name = "btnAgregarFilaManual";
+            this.btnAgregarFilaManual.Size = new System.Drawing.Size(220, 30);
+            this.btnAgregarFilaManual.TabIndex = 16;
+            this.btnAgregarFilaManual.Text = "Agregar fila manual (prueba)";
+            this.btnAgregarFilaManual.UseVisualStyleBackColor = true;
+            this.btnAgregarFilaManual.Click += new System.EventHandler(this.BtnAgregarFilaManual_Click);
+            //
             // dgvTransiciones
             //
             this.dgvTransiciones.AllowUserToAddRows = false;
@@ -185,6 +197,7 @@
             this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnValidar);
             this.Controls.Add(this.dgvTransiciones);
+            this.Controls.Add(this.btnAgregarFilaManual);
             this.Controls.Add(this.btnGenerarTabla);
             this.Controls.Add(this.txtFinales);
             this.Controls.Add(this.lblFinales);
@@ -217,6 +230,7 @@
         private System.Windows.Forms.Label lblFinales;
         private System.Windows.Forms.TextBox txtFinales;
         private System.Windows.Forms.Button btnGenerarTabla;
+        private System.Windows.Forms.Button btnAgregarFilaManual;
         private System.Windows.Forms.DataGridView dgvTransiciones;
         private System.Windows.Forms.Button btnValidar;
         private System.Windows.Forms.Button btnGuardar;
